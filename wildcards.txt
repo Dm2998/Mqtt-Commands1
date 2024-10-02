@@ -1,0 +1,29 @@
+_______________________________________________________________________________________________________
+(ex. To subscribe just type 
+ mosquitto_sub -h localhost -t /house/room1/# or /house/+/room1) 
+
+(ex. To publish just type 
+ mosquitto_pub -h localhost -t /house1/room1/# -m testHouse1Room1
+ mosquitto_pub -h localhost -t /house1/+/room1 -m testMessageBetweenHouse1AndRoom1) 
+_______________________________________________________________________________________________________
+
+1. (wildcard "#") = The wildcard "#" means is anything from the heiarchy of house room will be included
+(ex. /house/room1/# = /house1/room1/sprinkle, /house1/room1/smokeD)
+(ex. /house1/# = /house1/room2/sprinkle, house1/hall/smokeD)
+
+2. (wildcard "+") = /house/+/sprinkle means the wildcard "+" any words or letters 
+between the 2 forward slashes will be included
+(ex. /house1/+/sprinkle = [correct] /house1/hall/sprinkle, /house1/bathroom/sprinkle
+                          [wrong]  /house2/hall/sprinkle, /house/bathroom/sprinkle2) 
+______________________________________________________________________________________________________
+
+apt update
+apt install mosquito net-tools
+
+(sub and pub on localhost container)
+mosquito_sub -h localhost -m message
+mosquito_pub -h localhost -m message
+
+(sub and pub on different container using appropriate ip address)
+mosquito_sub -h <ip address of the broker> -m message
+mosquito_pub -h <ip address of the broker> -m message
